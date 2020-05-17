@@ -9,8 +9,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 @Module({
   imports: [
     CustomersModule,
-     AuthModule,
-    MongooseModule.forRoot('mongodb://localhost/nest')
+    AuthModule,
+    MongooseModule.forRoot('mongodb://localhost/customers')
     ],
   controllers: [ AuthController],
   providers: [ AuthService],
