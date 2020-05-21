@@ -1,5 +1,11 @@
 export class CreateCustomersDto {
- name: string;
- suname: string;
- isAdmin: boolean;
+    email: string;
+    name: string;
+    suname: string;
+    age: number;
+    address: string;
+    gender: string;
+    isAdmin: boolean;
+    password:string;
+    
 }

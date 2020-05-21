@@ -8,5 +8,4 @@ export interface ICustomer extends Document{
  readonly  gender: string;
  readonly isAdmin: boolean;
  readonly password:string;
- readonly id: string;
 }

@@ -9,7 +9,6 @@ export const CustomerSchema = new mongoose.Schema({
   address: {type: String, required: true},
   gender: {type:String, required:true, enum: Object.values(genderEnum)},
   isAdmin: {type:Boolean, required:true},
-  password:{type:String, required:true},
-  id: {type:String, default: null}
+  password:{type:String, required:true}
 });
 CustomerSchema.index({email: 1}, {unique : true})
