@@ -16,7 +16,6 @@ export const CustomerSchema = new mongoose.Schema({
   },
   phone:{type:String, default:null},
   gender: {type:String, required:true, enum: Object.values(genderEnum)},
-  isAdmin: {type:Boolean, required:true},
   password:{type:String, required:true},
   role:{type:[String], required:true, enum: Object.values(roleEnum)}
 });

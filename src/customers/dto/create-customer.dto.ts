@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IAddress } from "../interface/address.interface";
 
 export class CreateCustomersDto {
     @ApiProperty({
@@ -6,6 +7,21 @@ export class CreateCustomersDto {
         type: String
     })
     email: string;
+
+    @ApiProperty({
+        description: 'The avatar of a customer',
+        type: String
+    })
+    avatar: string;
+    
+    
+    @ApiProperty({
+        description: 'The avatarID of a customer',
+        type: String
+    })
+    avatarId: string;
+    
+    
 
     @ApiProperty({
         description: 'The Name of a customer',
@@ -29,7 +45,14 @@ export class CreateCustomersDto {
         description: 'The address of a customer',
         type: String
     })
-    address: string;
+    address: IAddress;
+
+    @ApiProperty({
+        description: 'The address of a customer',
+        type: String
+    })
+    phone: string;
+    
     
     @ApiProperty({
         description: 'The gender of a customer',
@@ -38,15 +61,14 @@ export class CreateCustomersDto {
     gender: string;
     
     @ApiProperty({
-        description: 'The rule of a customer',
-        type: Boolean
-    })
-    isAdmin: boolean;
-    
-    @ApiProperty({
         description: 'The password of a customer',
         type: String
     })
     password:string;
     
+    @ApiProperty({
+        description: 'The password of a customer',
+        type: String
+    })
+    role:Array<string>;
 }

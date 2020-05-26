@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { ICustomer } from './interface/customer.interface';
-import { CreateCustomersDto } from './dto/customer.dto';
+import { CreateCustomersDto } from './dto/create-customer.dto';
 import * as bcrypt from 'bcrypt';
 import * as _ from 'lodash';
 
@@ -13,11 +13,11 @@ export class CustomersService {
     async findOne(id: string):Promise<ICustomer>{
         return await this.customerModel.findById(id).exec()
     }
-    async create( createCustomerDto: CreateCustomersDto): Promise<ICustomer>{
+    async create( createCustomerDto: CreateCustomersDto, role: Array<string>): Promise<ICustomer>{
         const saltRounds = 10;
         const salt = await bcrypt.genSalt(saltRounds);
         const hash = await bcrypt.hash(createCustomerDto.password, salt);
-        const createdUser = new this.customerModel(_.assignIn(createCustomerDto, {password: hash}))
+        const createdUser = new this.customerModel(_.assignIn(createCustomerDto, {password: hash, role}))
         return await createdUser.save()
     }
     async findAll():Promise<any>{

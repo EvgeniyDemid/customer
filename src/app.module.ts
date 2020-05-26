@@ -5,6 +5,8 @@ import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
+import { TokenModule } from './auth/token/token.module';
+
 
 const environment = process.env.NODE_ENV || 'development';
 
@@ -23,7 +25,8 @@ const environment = process.env.NODE_ENV || 'development';
         useNewUrlParser:true,
         useUnifiedTopology:true
       }
-      )
+      ),
+    TokenModule,
     ],
  
   

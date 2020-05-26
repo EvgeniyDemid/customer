@@ -1,5 +1,5 @@
 import { Controller, Post, Body, Get, Param, Put, Delete } from '@nestjs/common';
-import { CreateCustomersDto } from './dto/customer.dto';
+import { CreateCustomersDto } from './dto/create-customer.dto';
 import { ICustomer } from './interface/customer.interface';
 import { CustomersService } from './customers.service';
 import { ApiBody, ApiTags, ApiResponse } from '@nestjs/swagger';
@@ -31,8 +31,8 @@ export class CustomersController {
     }
     @Post()
     @ApiBody({type:CreateCustomersDto})
-    createCustomer(@Body() createCustomersDto: CreateCustomersDto ): Promise<ICustomer>{
-        return this.customersService.create(createCustomersDto)
+    createCustomer(@Body() createCustomersDto: CreateCustomersDto, role ): Promise<ICustomer>{
+        return this.customersService.create(createCustomersDto,role )
     }
     @Put(':id')
     @ApiBody({type:CreateCustomersDto})

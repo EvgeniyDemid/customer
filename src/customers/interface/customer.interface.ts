@@ -1,11 +1,16 @@
 import {Document} from 'mongoose'
+import { IAddress } from './address.interface';
+
 export interface ICustomer extends Document{
  readonly email: string;
+ readonly avatar:string;
+ readonly avatarId: string;
  readonly name: string;
  readonly suname: string;
  readonly age: number;
- readonly address: string;
+ readonly address: IAddress;
+ readonly phone: string;
  readonly  gender: string;
- readonly isAdmin: boolean;
  readonly password:string;
+ readonly role: Array<string>;
 }
