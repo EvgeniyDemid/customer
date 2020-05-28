@@ -8,6 +8,8 @@ import { ConfigModule } from '@nestjs/config';
 import { TokenModule } from './auth/token/token.module';
 
 
+
+
 const environment = process.env.NODE_ENV || 'development';
 
 
@@ -16,6 +18,7 @@ const environment = process.env.NODE_ENV || 'development';
   imports: [
     CustomersModule,
     AuthModule,
+    TokenModule,
     ConfigModule.forRoot({
       envFilePath: `.env.${environment}`,
       isGlobal: true, 
@@ -26,11 +29,11 @@ const environment = process.env.NODE_ENV || 'development';
         useUnifiedTopology:true
       }
       ),
-    TokenModule,
+      
     ],
  
   
   controllers: [ AuthController],
-  providers: [ AuthService],
+  providers: [ AuthService,  ],
 })
 export class AppModule {}

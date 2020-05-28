@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param, Put, Delete } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Put, Delete, ValidationPipe } from '@nestjs/common';
 import { CreateCustomersDto } from './dto/create-customer.dto';
 import { ICustomer } from './interface/customer.interface';
 import { CustomersService } from './customers.service';
@@ -31,7 +31,7 @@ export class CustomersController {
     }
     @Post()
     @ApiBody({type:CreateCustomersDto})
-    createCustomer(@Body() createCustomersDto: CreateCustomersDto, role ): Promise<ICustomer>{
+    createCustomer(@Body(ValidationPipe) createCustomersDto: CreateCustomersDto, role ): Promise<ICustomer>{
         return this.customersService.create(createCustomersDto,role )
     }
     @Put(':id')

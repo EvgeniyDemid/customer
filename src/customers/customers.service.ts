@@ -29,5 +29,9 @@ export class CustomersService {
     async delete( id: string): Promise<ICustomer>{
         return await this.customerModel.findByIdAndDelete(id)
     }
+    async findByEmail(email:string):Promise<ICustomer | null >{
+        return await this.customerModel.findOne({email})
+
+    }
     
 }
