@@ -1,4 +1,4 @@
 export interface ItokenPayLoad {
-    _id: string,
+    id: string,
     roles: string[]
 }

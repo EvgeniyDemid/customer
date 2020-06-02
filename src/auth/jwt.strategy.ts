@@ -22,7 +22,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(req, customer: Partial<ICustomer>) {
     const token = req.headers.authorization.slice(7);
-    const tokenExists = await this.tokenService.exists(customer._id, token);
+    const tokenExists = await this.tokenService.exists(customer.id, token);
     if (tokenExists) {
       return customer;
     } else {

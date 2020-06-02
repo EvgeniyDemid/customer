@@ -1,11 +1,13 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { IAddress } from "../interface/address.interface";
+import { IsEmail, IsString, IsNotEmpty, IsNumber, IsPassportNumber, Matches, IsOptional } from "class-validator";
 
 export class CreateCustomersDto {
     @ApiProperty({
         description: 'The email of a customer',
         type: String
     })
+    @IsEmail()
     email: string;
 
     @ApiProperty({
@@ -27,30 +29,40 @@ export class CreateCustomersDto {
         description: 'The Name of a customer',
         type: String
     })
+    @IsString()
+    @IsNotEmpty()
     name: string;
     
     @ApiProperty({
         description: 'The Suname of a customer',
         type: String
     })
+    @IsString()
+    @IsNotEmpty()
     suname: string;
     
     @ApiProperty({
         description: 'The age of a customer',
         type: Number
     })
+    @IsNumber()
+    @IsNotEmpty()
     age: number;
     
-    @ApiProperty({
+    @ApiPropertyOptional({
         description: 'The address of a customer',
         type: String
     })
+    @IsOptional()
+
     address: IAddress;
 
     @ApiProperty({
         description: 'The address of a customer',
         type: String
     })
+    @IsNotEmpty()
+    @IsString()
     phone: string;
     
     
@@ -58,17 +70,23 @@ export class CreateCustomersDto {
         description: 'The gender of a customer',
         type: String
     })
+    @IsString()
+    @IsNotEmpty()
     gender: string;
     
     @ApiProperty({
         description: 'The password of a customer',
         type: String
     })
+    @IsString()
+    @IsNotEmpty()
+    @Matches( /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{16,})/,
+    { message: 'Weak password' },)
     password:string;
-    
     @ApiProperty({
         description: 'The password of a customer',
         type: String
     })
+
     role:Array<string>;
 }

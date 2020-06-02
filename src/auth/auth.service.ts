@@ -28,7 +28,7 @@ export class AuthService {
 
       if (user && (await bcrypt.compare(password, user.password))){
         const tokenPayload: ItokenPayLoad = {
-          _id: user.id,
+          id: user.id,
           roles: user.role
         };
         const token = await this.generateToken(tokenPayload);
@@ -39,10 +39,13 @@ export class AuthService {
         await this.saveToken({
           token,
           expireAt,
-          uId: user._id
+          uId: user.id
         });
+        const readeUser = user.toObject() as IReadableUser;
+        readeUser.accesseToken = token;
+      
       }
-      throw new BadRequestException("Токен истек")
+      throw new BadRequestException("Неверный логин или пароль")
 
     }
     private async generateToken (data: ItokenPayLoad, options?: SignOptions): Promise<string>{
