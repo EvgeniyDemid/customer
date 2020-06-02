@@ -17,7 +17,7 @@ const environment = process.env.NODE_ENV || 'development';
 @Module({
   imports: [
     CustomersModule,
-    AuthModule,
+    AppModule,
     TokenModule,
     ConfigModule.forRoot({
       envFilePath: `.env.${environment}`,
@@ -33,7 +33,7 @@ const environment = process.env.NODE_ENV || 'development';
     ],
  
   
-  controllers: [ AuthController],
-  providers: [ AuthService,  ],
+  controllers: [ ],
+  providers: [  ],
 })
 export class AppModule {}

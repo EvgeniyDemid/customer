@@ -6,7 +6,6 @@ import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports:[
-    JwtService ,
     MongooseModule.forFeature([{ name: 'Token', schema: TokenSchema }]),
   ],
   providers: [TokenService],

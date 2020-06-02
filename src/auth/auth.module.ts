@@ -4,9 +4,10 @@ import { CustomersModule } from 'src/customers/customers.module';
 import { TokenModule } from './token/token.module';
 import { ConfigModule } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
+import { JwtModule, JwtService } from '@nestjs/jwt';
 import { AuthController } from './auth.controller';
-import { JwtStrategy } from './jwt.strategy';
+import { CustomersService } from 'src/customers/customers.service';
+
 
 
 @Module({
@@ -20,8 +21,9 @@ import { JwtStrategy } from './jwt.strategy';
         signOptions: { expiresIn: '1d' },
       }),
     ],
-    providers: [AuthService, JwtStrategy],
+    providers: [AuthService],
     controllers: [AuthController],
+    exports: [AuthService ]
   })
   
 export class AuthModule {}
