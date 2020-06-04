@@ -12,6 +12,7 @@ import moment from 'moment';
 import { SingInDto } from './token/dto/singnin.dto';
 import { IReadableUser } from './token/interface/IReadableUser';
 import { ItokenPayLoad } from './token/interface/token-playload.interface';
+import { userSensitiveFieldsEnum } from 'src/customers/enum/userSensitiveFieldsEnumю';
 
 @Injectable()
 export class AuthService {
@@ -19,16 +20,14 @@ export class AuthService {
       private readonly tokenService: TokenService,
       private readonly jwtService: JwtService,
       private readonly customerService: CustomersService,
-      private readonly configService: ConfigService,
       ) {}
-      
-
+    
     async signIn({email, password}:SingInDto):Promise<IReadableUser> {
       const user = await this.customerService.findByEmail(email)
 
       if (user && (await bcrypt.compare(password, user.password))){
         const tokenPayload: ItokenPayLoad = {
-          id: user.id,
+          id: user._id,
           roles: user.role
         };
         const token = await this.generateToken(tokenPayload);
@@ -39,10 +38,11 @@ export class AuthService {
         await this.saveToken({
           token,
           expireAt,
-          uId: user.id
+          uId: user._id
         });
         const readeUser = user.toObject() as IReadableUser;
         readeUser.accesseToken = token;
+        return _.omit<any>(readeUser, Object.values(userSensitiveFieldsEnum)) as IReadableUser;
       
       }
       throw new BadRequestException("Неверный логин или пароль")

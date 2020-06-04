@@ -6,11 +6,11 @@ import { AuthModule } from './auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { TokenModule } from './auth/token/token.module';
+import { configModule } from './config.root';
 
 
 
 
-const environment = process.env.NODE_ENV || 'development';
 
 
 
@@ -18,18 +18,15 @@ const environment = process.env.NODE_ENV || 'development';
   imports: [
     CustomersModule,
     AppModule,
-    TokenModule,
-    ConfigModule.forRoot({
-      envFilePath: `.env.${environment}`,
-      isGlobal: true, 
-    }),
+    AuthModule,
+    configModule,
     MongooseModule.forRoot(process.env.MONGODB_WRITE_CONNECTION_STRING,
       {
         useNewUrlParser:true,
         useUnifiedTopology:true
       }
       ),
-      
+      TokenModule,
     ],
  
   

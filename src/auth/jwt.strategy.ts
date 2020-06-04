@@ -15,14 +15,15 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     ) {
     super({
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-        secretOrKey: configService.get<string>('JWT_SECRET'),
+        secretOrKey: configService.get<string>('JWT_SICRET'),
         passReqToCallback: true,
     });
+    
   }
 
   async validate(req, customer: Partial<ICustomer>) {
     const token = req.headers.authorization.slice(7);
-    const tokenExists = await this.tokenService.exists(customer.id, token);
+    const tokenExists = await this.tokenService.exists(customer._id, token);
     if (tokenExists) {
       return customer;
     } else {

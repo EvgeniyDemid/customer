@@ -1,6 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { IAddress } from "../interface/address.interface";
-import { IsEmail, IsString, IsNotEmpty, IsNumber, IsPassportNumber, Matches, IsOptional } from "class-validator";
+import { IsEmail, IsString, IsNotEmpty, IsNumber, IsPassportNumber, Matches, IsOptional, IsEnum } from "class-validator";
+import { genderEnum } from "../enum/gender.enum";
 
 export class CreateCustomersDto {
     @ApiProperty({
@@ -72,6 +73,7 @@ export class CreateCustomersDto {
     })
     @IsString()
     @IsNotEmpty()
+    @IsEnum(genderEnum)
     gender: string;
     
     @ApiProperty({
