@@ -33,7 +33,7 @@
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
     "lodash": "^4.17.15",
-    "moment": "^2.26.0",
+    "moment": "^2.29.4",
     "mongoose": "^5.9.16",
     "omit": "^1.0.1",
     "passport": "^0.4.1",
